@@ -22,6 +22,8 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 h1{font-size:1.35rem}
 .sub{color:var(--muted);font-size:.85rem;margin-top:2px}
 .iconbtn{background:var(--card);border:1px solid var(--border);border-radius:10px;width:40px;height:40px;font-size:1.2rem;cursor:pointer;color:var(--text)}
+.dbbtn{background:var(--primary);border:1px solid var(--primary);border-radius:10px;height:40px;padding:0 18px;font-size:1rem;font-weight:700;cursor:pointer;color:#fff;display:flex;align-items:center;gap:8px}
+.dbbtn:hover{background:var(--primary-d);border-color:var(--primary-d)}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
 label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:6px}
 input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:1rem;background:var(--bg);color:var(--text)}
@@ -68,8 +70,8 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin:22px 0 8px}
       <h1>🔗 Tautan</h1>
       <div class="sub">Kumpulan tautan berdasarkan kategori</div>
     </div>
-    <div style="display:flex;gap:8px">
-      <button class="iconbtn" id="dbBtn" title="Buka database (perlu password)">🗄</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="dbbtn" id="dbBtn" title="Buka database (perlu password)">🗄 Database</button>
       <button class="iconbtn" id="themeBtn" title="Mode terang/gelap">🌙</button>
     </div>
   </header>
