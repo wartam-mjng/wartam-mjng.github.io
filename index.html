@@ -68,7 +68,10 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin:22px 0 8px}
       <h1>🔗 Tautan</h1>
       <div class="sub">Kumpulan tautan berdasarkan kategori</div>
     </div>
-    <button class="iconbtn" id="themeBtn" title="Mode terang/gelap">🌙</button>
+    <div style="display:flex;gap:8px">
+      <button class="iconbtn" id="dbBtn" title="Buka database (perlu password)">🗄</button>
+      <button class="iconbtn" id="themeBtn" title="Mode terang/gelap">🌙</button>
+    </div>
   </header>
 
   <div id="cfgWarn" class="alert warn" style="display:none">⚠️ <b>Belum disambungkan.</b> Tempel Web App URL ke konstanta <b>WEBAPP_URL</b> di file ini (lihat PANDUAN.txt).</div>
@@ -86,7 +89,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin:22px 0 8px}
     <div class="grid" id="grid"></div>
   </div>
 
-  <footer>Dikembangkan oleh Wartam - SMP Negeri 4 Majenang</footer>
+  <footer>Dikembangkan oleh Wartam - SMP Negeri 4 Majenang<br><a href="#" id="chgPw" style="color:var(--muted);font-size:.75rem">Ganti password database</a></footer>
 </div>
 
 <script>
@@ -126,6 +129,65 @@ const themeBtn = $('themeBtn');
 function setTheme(t){ document.body.classList.toggle('dark', t==='dark'); themeBtn.textContent = t==='dark'?'☀️':'🌙'; localStorage.setItem('tk_theme', t); }
 setTheme(localStorage.getItem('tk_theme') || 'light');
 themeBtn.onclick = () => setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
+
+/* ---------- database (tombol + password) ---------- */
+const DB_URL = "https://docs.google.com/spreadsheets/d/1wYEYRxmk0ZojRX75qv8Xrur5iV-q7pZSojWm6-kT0-0/edit?usp=sharing";
+const DB_PW_KEY = 'tk_db_pw'; // hash SHA-256 password, tersimpan di browser
+
+async function sha256hex(s){
+  try{
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+  }catch(e){
+    let h1 = 0xdeadbeef, h2 = 0x41c6ce57; // cadangan bila crypto.subtle tak tersedia
+    for(let i = 0; i < s.length; i++){
+      const ch = s.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return (h2 >>> 0).toString(16) + (h1 >>> 0).toString(16);
+  }
+}
+
+$('dbBtn').onclick = async () => {
+  const saved = localStorage.getItem(DB_PW_KEY);
+  if(!saved){
+    // belum ada password -> buat baru
+    const p1 = prompt('Buat password untuk tombol Database:');
+    if(p1 === null || !p1) return;
+    const p2 = prompt('Ulangi password:');
+    if(p2 === null) return;
+    if(p1 !== p2){ alert('Password tidak sama. Coba lagi.'); return; }
+    localStorage.setItem(DB_PW_KEY, await sha256hex(p1));
+    alert('Password tersimpan di browser ini.');
+    window.open(DB_URL, '_blank', 'noopener');
+    return;
+  }
+  const p = prompt('Masukkan password untuk membuka database:');
+  if(p === null) return;
+  if(await sha256hex(p) === saved){
+    window.open(DB_URL, '_blank', 'noopener');
+  } else {
+    alert('Password salah.');
+  }
+};
+
+$('chgPw').onclick = async (e) => {
+  e.preventDefault();
+  const saved = localStorage.getItem(DB_PW_KEY);
+  if(!saved){ alert('Belum ada password yang dibuat.\nKlik tombol 🗄 Database untuk membuatnya.'); return; }
+  const old = prompt('Masukkan password lama:');
+  if(old === null) return;
+  if(await sha256hex(old) !== saved){ alert('Password lama salah.'); return; }
+  const p1 = prompt('Password baru:');
+  if(p1 === null || !p1) return;
+  const p2 = prompt('Ulangi password baru:');
+  if(p2 === null) return;
+  if(p1 !== p2){ alert('Password tidak sama.'); return; }
+  localStorage.setItem(DB_PW_KEY, await sha256hex(p1));
+  alert('Password berhasil diganti.');
+};
 
 /* ---------- pesan ---------- */
 function showMsg(html, type){ $('msg').innerHTML = html ? '<div class="alert '+type+'">'+html+'</div>' : ''; }
@@ -295,4 +357,3 @@ init();
 </script>
 </body>
 </html>
-
