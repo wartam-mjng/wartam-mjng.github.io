@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tautan</title>
+<title>KELANA — Gerbang Digital Wartam</title>
 <style>
 :root{
   --bg:#f4f6fb; --card:#ffffff; --text:#1c2333; --muted:#6b7280;
@@ -60,21 +60,76 @@ body.dark .alert.warn{background:#3a2c10;color:#fcd34d}
 .loading{text-align:center;padding:24px;color:var(--muted)}
 .spinner{display:inline-block;width:22px;height:22px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;vertical-align:-5px;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+.hero{position:relative;overflow:hidden;border-radius:20px;padding:28px 22px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#1d4ed8 0%,#0ea5e9 55%,#14b8a6 100%);box-shadow:0 10px 30px rgba(29,78,216,.35)}
+.hero::after{content:'🚀';position:absolute;right:6px;bottom:-16px;font-size:7rem;opacity:.16;transform:rotate(-10deg)}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;position:relative;z-index:1}
+.merek{font-size:.78rem;letter-spacing:.22em;font-weight:700;opacity:.9;text-transform:uppercase}
+h1.mega{font-size:2.6rem;line-height:1.05;margin:2px 0 4px;text-shadow:0 2px 10px rgba(0,0,0,.18)}
+.tagline{font-size:1.02rem;font-style:italic;opacity:.96}
+.pemilik{margin-top:12px;font-size:.9rem;opacity:.95}
+.salam{font-size:.85rem;opacity:.85;margin-top:2px}
+.hbtns{display:flex;gap:8px;flex:none}
+.hbtns .iconbtn,.hbtns .dbbtn{box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.sec-title{font-size:1.08rem;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+a.fbtn{display:block;background:var(--card);border:1px solid var(--border);border-left:6px solid var(--fc,#2563eb);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--text);transition:transform .12s,box-shadow .12s}
+a.fbtn:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.13)}
+.fico{font-size:1.7rem}
+.fname{font-weight:800;font-size:1.02rem;margin-top:6px;line-height:1.3}
+.fdesc{font-size:.82rem;color:var(--muted);margin-top:3px;line-height:1.4}
+.fgo{font-size:.78rem;color:var(--primary);font-weight:700;margin-top:8px}
 footer{text-align:center;color:var(--muted);font-size:.8rem;margin:22px 0 8px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div>
-      <h1>🔗 Tautan</h1>
-      <div class="sub">Kumpulan tautan berdasarkan kategori</div>
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="merek">Kelas Luring–Daring Terhubung</div>
+        <h1 class="mega">KELANA</h1>
+        <div class="tagline">&ldquo;Satu akses, banyak kemungkinan belajar.&rdquo;</div>
+        <div class="pemilik">Gerbang Digital <b>Wartam, S.Pd.</b> — SMP Negeri 4 Majenang</div>
+        <div class="salam" id="salam"></div>
+      </div>
+      <div class="hbtns">
+        <button class="dbbtn" id="dbBtn" title="Buka database (perlu password)">🗄 Database</button>
+        <button class="iconbtn" id="themeBtn" title="Mode terang/gelap">🌙</button>
+      </div>
     </div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button class="dbbtn" id="dbBtn" title="Buka database (perlu password)">🗄 Database</button>
-      <button class="iconbtn" id="themeBtn" title="Mode terang/gelap">🌙</button>
-    </div>
-  </header>
+  </div>
+
+  <h2 class="sec-title">⭐ Unggulan</h2>
+  <div class="fgrid">
+    <a class="fbtn" style="--fc:#0ea5e9" href="https://kelas.wartam.web.id" target="_blank" rel="noopener">
+      <div class="fico">🚀</div><div class="fname">KELANA — Server Kelas</div>
+      <div class="fdesc">Berbagi berkas &amp; materi kelas, bisa luring maupun daring.</div>
+      <div class="fgo">Buka →</div>
+    </a>
+    <a class="fbtn" style="--fc:#2563eb" href="https://smpn4majenang.github.io/sistem_pembelajaran_asesmen/" target="_blank" rel="noopener">
+      <div class="fico">🏫</div><div class="fname">Sistem Pembelajaran &amp; Asesmen</div>
+      <div class="fdesc">Satu pintu aplikasi pembelajaran SMP Negeri 4 Majenang.</div>
+      <div class="fgo">Buka →</div>
+    </a>
+    <a class="fbtn" style="--fc:#14b8a6" href="https://wartam-mjng.github.io/akun-sekolah-2026/" target="_blank" rel="noopener">
+      <div class="fico">🔑</div><div class="fname">Cek Akun Murid</div>
+      <div class="fdesc">Murid mengecek akun belajar @smpn04majenang.sch.id cukup dengan NIS.</div>
+      <div class="fgo">Buka →</div>
+    </a>
+    <a class="fbtn" style="--fc:#f59e0b" href="https://asesmen-awal-matematika.wartam.web.id" target="_blank" rel="noopener">
+      <div class="fico">📝</div><div class="fname">Asesmen Awal Matematika</div>
+      <div class="fdesc">Diagnostik kemampuan awal matematika murid.</div>
+      <div class="fgo">Buka →</div>
+    </a>
+    <a class="fbtn" style="--fc:#8b5cf6" href="https://wartam-mjng.github.io/laporan-keuangan/" target="_blank" rel="noopener">
+      <div class="fico">💰</div><div class="fname">Laporan Keuangan PAB GPS</div>
+      <div class="fdesc">Transparansi pemasukan &amp; pengeluaran PAB GPS.</div>
+      <div class="fgo">Buka →</div>
+    </a>
+  </div>
+
+  <h2 class="sec-title">🔗 Semua Tautan</h2>
 
   <div id="cfgWarn" class="alert warn" style="display:none">⚠️ <b>Belum disambungkan.</b> Tempel Web App URL ke konstanta <b>WEBAPP_URL</b> di file ini (lihat PANDUAN.txt).</div>
   <div id="msg"></div>
@@ -125,6 +180,13 @@ function pickSheet(bawaan){
   const saved = localStorage.getItem('tk_sheet');
   return SHEETS.indexOf(saved) >= 0 ? saved : (bawaan || SHEETS[0]);
 }
+
+/* ---------- salam sesuai jam ---------- */
+(function(){
+  const j = new Date().getHours();
+  const s = j < 11 ? 'Selamat pagi' : j < 15 ? 'Selamat siang' : j < 19 ? 'Selamat sore' : 'Selamat malam';
+  $('salam').textContent = s + ' — silakan pilih layanan yang dibutuhkan.';
+})();
 
 /* ---------- tema ---------- */
 const themeBtn = $('themeBtn');
